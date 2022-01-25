@@ -45,9 +45,11 @@ Action CmdRemoveWeapons(int client, int argc) {
         if (IsClientConnected(targets[i]) && IsClientInGame(targets[i]) && IsPlayerAlive(targets[i])) {
             for (int j = 0; j < MAX_SLOTS; ++j) {
                 int weapon = GetPlayerWeaponSlot(targets[i], j);
-                RemovePlayerItem(targets[i], weapon);
-                ++removed;
+                if (weapon > 0) {
+                    RemovePlayerItem(targets[i], weapon);
+                }
             }
+            ++removed;
         }
     }
 
